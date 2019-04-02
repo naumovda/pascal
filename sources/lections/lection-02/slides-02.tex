@@ -1,0 +1,279 @@
+\documentclass{beamer}
+\mode<presentation>
+\usetheme{CambridgeUS}
+\usepackage[russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage{sansmathaccent}
+
+\usepackage{verbatim}
+\usepackage{alltt}
+
+\pdfmapfile{+sansmathaccent.map}
+\title[Массивы]{Множественный тип данных}
+\author{Наумов Д.А., доц. каф. КТ, ИТГД }
+\date[16.02.2019] {Алгоритмические языки и программирование, 2019}
+
+\begin{document}
+
+%ТИТУЛЬНЫЙ СЛАЙД
+\begin{frame}
+  \titlepage
+\end{frame}
+  
+%СОДЕРЖАНИЕ ЛЕКЦИИ
+\begin{frame}
+  \frametitle{Содержание лекции}
+  \tableofcontents  
+\end{frame}
+  
+%РАЗДЕЛ 1
+\section{Элементы теории множеств}
+\subsection{Понятия и определения}
+\begin{frame}
+Множество — одно из ключевых понятий математики; это математический объект, сам являющийся набором, совокупностью, собранием каких-либо объектов, которые называются элементами этого множества и обладают общим для всех их характеристическим свойством.
+\begin{block}{Множество может быть}
+\begin{itemize}
+\item пустым и не пустым;
+\item упорядоченным и не упорядоченным;
+\item конечным и бесконечным;
+\item бесконечное множество - счетным и несчетным;
+\end{itemize}
+\end{block}
+\begin{block}{Элементы множества}
+объекты, из которых состоит множество.
+\end{block}
+\end{frame} 
+
+\begin{frame}
+\begin{block}{Принадлежность элемента \textit{a} множеству \textit{A}}
+\[a \in A\].
+\end{block}
+\begin{block}{Не принадлежность элемента \textit{a} множеству \textit{A}}
+\[a \notin A\].
+\end{block}
+\begin{block}{Равенство двух множеств \textit{A = B}}
+\[x \in A \Longleftrightarrow x \in B\].
+\end{block}
+\begin{block}{Способы задания множеств}
+\begin{itemize}
+\item перечисление $Y = \{0, 2, 4, 8\}$;
+\item описание $ Y = \{x \in X | A(x)\} $;
+\end{itemize}
+\end{block}
+\end{frame} 
+
+\subsection{Отношения между множествами}
+\begin{frame}
+\begin{block}{\textit{A} включено в \textit{B}, если каждый элемент \textit{A} принадлежит \textit{B}}
+\[A \subseteq B \Leftrightarrow \forall a\in A: a\in B\].
+\end{block}
+\begin{block}{\textit{A} включает \textit{B}, если \textit{B} включено в \textit{A}}
+\[A \supseteq B \Leftrightarrow B \subseteq A \].
+\end{block}
+\begin{block}{\textit{A} равно \textit{B}, если \textit{A} и \textit{B} включены друг в друга}
+\[A=B \Leftrightarrow (A\subseteq B)\wedge(B\subseteq A) \].
+\end{block}
+\begin{itemize}
+\item $A = A$;
+\item если $A = B$, то $B = A$;
+\item если $A = B$, $A = B$, то $A = C$;
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{block}{\textit{A} строго включено в \textit{B}, если \textit{A} включено в \textit{B} и не равное ему}
+\[A \subset B \Leftrightarrow (A \subseteq B)\wedge (A \neq B)\].
+\end{block}
+\begin{block}{\textit{A} строго включает \textit{B}, если \textit{B} строго включено в \textit{A}}
+\[A \supset B \Leftrightarrow B \subset A \].
+\end{block}
+\begin{block}{\textit{A} и \textit{B} не пересекаются, если у них нет общих элементов}
+\[A и B не пересекаются \Leftrightarrow \forall a \in A: a \notin B \].
+\end{block}
+\begin{block}{\textit{A} и \textit{B} находятся в общем положении}
+\[ \exists a,b,c: (a\in A)\wedge(a \notin B)\wedge(b\in B)\wedge(b \notin A)\wedge(c\in B)\wedge(c \in B)\].
+\end{block}
+\end{frame}
+
+\begin{frame}
+Диаграмма Венна (также используется название диаграмма Эйлера — Венна) — схематичное изображение всех возможных отношений (объединение, пересечение, разность, симметрическая разность) нескольких (часто — трёх) подмножеств универсального множества.
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.2]{images/venn_diagram.png}
+\caption{Диаграмма Венна, показывающая все пересечения графем заглавных букв греческого, русского и латинского алфавитов}
+\label{pic-venn}
+\end{figure}
+Автор: Watchduck (a.k.a. Tilman Piesk) - File:Venn diagram gr la ru.svg, Общественное достояние, https://commons.wikimedia.org/w/index.php?curid=27169804
+\end{frame}
+
+\subsection{Операции над множествами}
+\begin{frame}{Бинарные операции}
+\begin{block}{Пересечение}
+\[A\cap B := \{ x|x \in A\wedge x \in B \}\].
+\end{block}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.1]{images/intersect.png}
+\caption{Диаграмма Венна для пересечения множеств}
+\label{pic-intersect}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Бинарные операции}
+\begin{block}{Объединение}
+\[A\cap B := \{ x|x \in A \vee x \in B \}\].
+\end{block}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.1]{images/union.png}
+\caption{Диаграмма Венна для объединения множеств}
+\label{pic-union}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Бинарные операции}
+\begin{block}{Разность множеств}
+\[A \setminus B := \{ x|x \in A \wedge x \notin B \}\].
+\end{block}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.1]{images/sub.png}
+\caption{Диаграмма Венна для разности множеств}
+\label{pic-union}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Бинарные операции}
+\begin{block}{Симметрическая разность множеств}
+\[A \bigtriangleup B := (A \setminus B)\cup(B\setminus A)\].
+\end{block}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.1]{images/xor.png}
+\caption{Диаграмма Венна для симметрической разности множеств}
+\label{pic-union}
+\end{figure}
+\end{frame}
+
+\section{Множественный тип в языке Pascal}
+\begin{frame}[fragile]
+\begin{block}{Множество}
+структура данных, представляющая ограниченную неупорядоченную совокупность различных элементов одного типа.
+\end{block}
+\begin{alltt}
+1  a := []; //пустое множество
+2  b := [2, 4, 7, 10]; //множество из четырех элементов целого типа
+3  с := ['e', 'u', 'i', 'o', 'a', 'y']; //множество из шести символов
+4  k := 15; d := [1, k, 2*k]; //множество трех элементов
+5  e := [1..100];
+6  f := [k..2*k];
+7  g := ['А'..'Я', 'а'..'п', 'р'..'я'];
+8  h := [1..1, 5..1]; //эквивалентно [1]
+9  j := [5..1];//эквивалентно []
+\end{alltt}
+Порядок перечисления элементов в множестве не играет роли.
+\begin{alltt}
+10  m := [5, 3, 1]; //эквивалентно [1, 3, 5]
+11  n := [1, z, 2*z]; //эквивалентно [1, 2] при z = 1
+\end{alltt}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{Множественный тип (тип множества)}
+структурный тип данных, значением которого является множество.
+\end{block}
+\begin{alltt}
+  type ИмяТипа = set of БазовыйТип;
+\end{alltt}
+Базовый тип - любой порядковый (+ ограничения реализации Pascal).
+\begin{alltt}
+1  type 
+2     TLetters = 'A'..'Z';
+3     TLettersSet = set of TLetters;
+4     TCharSet = set of char;  
+5     TIndexSet = set of 1..100;
+\end{alltt}
+В программе могут быть заданы константы и переменные множественного типа.
+\begin{alltt}
+6  const 
+7     Wowels = ['e', 'u', 'i', 'o', 'a', 'y'];
+\end{alltt}
+\end{frame}
+   
+\begin{frame}[fragile]
+\begin{block}{Конструктор множества}
+позволяет задать значение переменной или константы множественного типа.
+\end{block}
+\begin{alltt}
+1  type TLetters = set of char;
+2  var
+3     RussianCap, EnglishCap: TLetters;
+4  begin
+5     RussianCap := ['А'..'Я'];
+6     EnglishCap := ['A'..'Z'];
+\end{alltt}
+Переменные и типизированные константы могут участвовать в опрациях присваивания, если они 
+принадлежат к идентичным типам.
+\end{frame}  
+
+\begin{frame}
+\begin{block}{Операции над множествами}
+\begin{itemize}
+\item объединение [1, 2, 4] + [2, 4, 8]; //результат [1, 2, 4, 8];
+\item пересечение [1, 2, 4] * [2, 4, 8]; //результат [2, 4];
+\item разность [1, 2, 4] - [2, 4, 8]; //результат [1];
+\end{itemize}
+\end{block}
+\begin{block}{Операции отношения}
+\begin{itemize}
+\item равенство (A = B);
+\item неравенство (A <> B);
+\item A содержится в B (A <= B);
+\item A содержит B (A >= B);
+\end{itemize}
+\end{block}
+\begin{block}{Принадлежность элемента множеству}
+\begin{itemize}
+\item x in A;
+\end{itemize}
+\end{block}
+Приоритет операций: пересечение, (объединение, разность), сравнение и принадлежность
+\end{frame}   
+
+\begin{frame}
+\begin{block}{Упражнения}
+\begin{itemize}
+\item определить, является ли последовательность симоволов корректным идентификатором языка Pascal;
+\item определить, из скольких различных цифр состоит число;
+\item сформировать множество простых чисел, не превышающее N;
+\end{itemize}
+\end{block}
+\end{frame}    
+
+\begin{frame}{Варианты заданий}
+\begin{enumerate}
+\item Вывести буквы, входящие в текст только один раз.
+\item Вывести буквы, входящие в текст не менее одного раза.
+\item Определить, каких символов в тексте больше: гласных или согласных.
+\item Определить повторяющиеся гласные буквы в тексте.
+\item Определить, можно ли из символов одного слова составить другое слово.
+\item Для числа, заданного в десятичной системе, вывести цифры его представления в двоичной системе.
+\item Для числа, заданного в десятичной системе, вывести цифры его представления в восьмеричной системе.
+\item Для числа, заданного в десятичной системе, вывести цифры его представления в дестнадцатеричной системе.
+\item Определить числа, не превышающие N, которые можно представить в виде $a^{2} + b^{2}$.
+\item Вывести цифры, не входящие в десятичную запись числа.
+\end{enumerate}
+\end{frame} 
+   
+\section*{Литература}
+\begin{frame}   
+\begin{enumerate}
+\item Множество // Математическая энциклопедия (в 5 томах). — М.: Советская Энциклопедия, 1982. — Т. 3. — С. 762.
+\item К. Куратовский, А. Мостовский. Теория множеств / Перевод с английского М. И. Кратко под редакцией А. Д. Тайманова. — М.: Мир, 1970. — 416 с.
+\item Н. Бурбаки. Основания математики. Логика. Теория множеств // Очерки по истории математики / И. Г. Башмакова (перевод с французского). — М: Издательство иностранной литературы, 1963. — С. 37—53. — 292 с. — (Элементы математики).
+\item Г. Кантор. Труды по теории множеств. — М.: Наука, 1985. — 430 с. — (Классики науки). — 3450 экз..
+\end{enumerate}
+\end{frame}   
+
+\end{document}
