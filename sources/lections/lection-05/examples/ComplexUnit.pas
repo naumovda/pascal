@@ -1,14 +1,15 @@
-{
+﻿{
 	Библиотека работы с комплексными числами
 
 	version 0.2
 }
-unit Complex;
+unit ComplexUnit;
 
 interface
+	
 	type
 		//тип данных для хранения вещественной и мнимой части
-		TСElem = real;
+		TCElem = real;
 		
 		//форма вывода комплексного числа
 		TCOutputForm = (cofAlg, cofExp, cofTrg);
@@ -16,33 +17,36 @@ interface
 		//структура данных для работы с комплексными числами
 		TComplex = record
 			Re, //вещественная часть
-			Im: TСElem; //мнимая часть
+			Im: TCElem; //мнимая часть
 		end;
+	
 	const
 		//типизированные константы
 		C_ZERO: TComplex = (Re:0; Im:0);
 		C_ONE: TComplex = (Re:1; Im:0);
 		C_IM_ONE: TComplex = (Re:0; Im:1);
 
-		//точность представления, кол-во
-		//  двочиных разрядов при выводе
+		//точность представления 		
 		C_PR: byte = 2;
+		//количество разрядов при выводе
 		C_DC: byte = C_PR + 2;
 
 	//заголовки открытых процедур и функций
-	procedure Init(Re, Im: TСElem; var A: TComplex);
+	
+	//инициализация полей
+	procedure Init(Re, Im: TCElem; var A: TComplex);
 
 	//сложение
-	procedure Add(const A, B: TComplex; var C: TComplex); 
+	procedure AddC(const A, B: TComplex; var C: TComplex); 
 
 	//вычитание
-	procedure Sub(const A, B: TComplex; var C: TComplex); 
+	procedure SubC(const A, B: TComplex; var C: TComplex); 
 
 	//умножение
-	procedure Mul(const A, B: TComplex; var C: TComplex); 
+	procedure MulC(const A, B: TComplex; var C: TComplex); 
 
 	//деление
-	procedure Div(const A, B: TComplex; var C: TComplex); 
+	procedure DivC(const A, B: TComplex; var C: TComplex); 
 
 	//получение сопряженного числа
 	procedure Conj(const A: TComplex; var B: TComplex); 
@@ -80,20 +84,21 @@ interface
 	procedure CClearError;
 
 	//расшифровка кода ошибки
-	function GetErrorMessage:string;
+	function CGetErrorMessage:string;
 
 implementation
 	const
 		//константа для разделения дробной и целой части
 		DELIMITER = ',';
-		OUT_FORM : TCOutputForm = cofAlg;
+		//погрешность вычислений
 		EPS = 1e-6;
 
 	var
-		iCError: integer;
+	  //глобальная переменная, признак ошибки
+		iCError: integer = 0;
+		//форма вывода по умолчанию
+		OUT_FORM: TCOutputForm = cofAlg;		
 
-	//реализация открытых процедур и функций
-	
 	//do: инициализаия полей переменной комлексного типа
 	//	  значениями Re, Im
 	//in:
@@ -101,7 +106,7 @@ implementation
 	//  Im - мнимая часть
 	//out: 
 	//	A - комплексное число (Re, Im)
-	procedure Init(Re, Im: TСElem; var A: TComplex);
+	procedure Init(Re, Im: TCElem; var A: TComplex);
 	begin
 		A.Re := Re;
 		A.Im := Im;
@@ -112,7 +117,7 @@ implementation
 	//	A, B - слагаемые
 	//out: 
 	//	С - сумма A+B
-	procedure Add(const A, B: TComplex; var C: TComplex);
+	procedure AddC(const A, B: TComplex; var C: TComplex);
 	begin
 		C.Re := A.Re + B.Re;
 		C.Im := A.Im + B.Im;
@@ -124,7 +129,7 @@ implementation
 	//  B - вычитаемое
 	//out: 
 	//	С - разность A - B
-	procedure Sub(const A, B: TComplex; var C: TComplex); 
+	procedure SubC(const A, B: TComplex; var C: TComplex); 
 	begin
 		C.Re := A.Re - B.Re;
 		C.Im := A.Im - B.Im;
@@ -135,7 +140,7 @@ implementation
 	//	A, B - множители
 	//out: 
 	//	С - разность A - B
-	procedure Mul(const A, B: TComplex; var C: TComplex); //умножение
+	procedure MulC(const A, B: TComplex; var C: TComplex); //умножение
 	begin
 		C.Re := A.Re * B.Re - A.Im * B.Im;
 		C.Im := A.Re * B.Im + A.Im * B.Re;
@@ -147,7 +152,7 @@ implementation
 	//  B - делитель. B <> (0, 0)
 	//out: 
 	//	С - частное A / B
-	procedure Div(const A, B: TComplex; var C: TComplex);
+	procedure DivC(const A, B: TComplex; var C: TComplex);
 	var
 		d: TCElem;
 	begin
@@ -190,33 +195,45 @@ implementation
 		GetIm := A.Im;
 	end;
 
-	//получение модуля и аргумента
+	//do: получение модуля комплексного числа
+	//in:
+	//	A - комплекксное число
+	//out: 
+	//	GetModule - модуль A		
 	function GetModule(const A: TComplex): TCElem;
 	begin
 		GetModule := sqrt(A.Re*A.Re + A.Im*A.Im);
 	end;
 
-	function GetArgument(const A: TComplex): TCElem;
-	begin
-		if (abs(A.Re) <EPS) AND (abs(A.Im) <EPS) then
-		begin
-			GetArgument := 0;
-
-			CSetError(-2);
-		end;
-		//...
-	end;
-
-	//вывод комплексного числа
-	//do: вывод комплексного числа в форме OUT_FORM
+  //do: получение аргумента комплексного числа
 	//in:
 	//	A - комплекксное число
-	//out: none	
-	procedure Out(const A: TComplex);
+	//out: 
+	//	GetModule - аргумент A		  
+	function GetArgument(const A: TComplex): TCElem;
 	begin
-		OutForm(A, OUT_FORM);
+    if abs(a.Re) < EPS then
+      if abs(a.Im) < EPS then
+      begin
+        GetArgument := 0;
+        
+        CSetError(-2);
+      end
+      else
+        if a.Im > 0 then
+          GetArgument := Pi / 2
+        else
+          GetArgument := - Pi / 2    
+    else
+      if a.Re > 0 then
+        GetArgument := arctan(a.Im / a.Re)
+      else if a.Re < 0 then
+        if a.Im >= 0 then
+          GetArgument := arctan(a.Im / a.Re) + Pi
+        else
+          GetArgument := arctan(a.Im / a.Re) - Pi;
 	end;
-	
+
 	//do: вывод комплексного числа в заданной форме
 	//in:
 	//	A - комплекксное число
@@ -230,6 +247,16 @@ implementation
 		writeln(CToStringForm(A, aForm));
 	end;
 
+	//вывод комплексного числа
+	//do: вывод комплексного числа в форме OUT_FORM
+	//in:
+	//	A - комплекксное число
+	//out: none	
+	procedure Out(const A: TComplex);
+	begin
+		OutForm(A, OUT_FORM);
+	end;
+	
 	//do: установка формы вывода комплексного числа по-умолчанию
 	//in:
 	//  aForm - форма вывода, TCOutputForm
@@ -255,10 +282,10 @@ implementation
 		s, s1, s2: string;
 		ar, md: TCElem;
 	begin
-		if OUT_FORM in [cofExp, cofTrg] then
+		if aForm in [cofExp, cofTrg] then
 		begin
-			ar := GetModule(A);
-			md := GetArgument(A);
+			md := GetModule(A);
+			ar := GetArgument(A);
 
 			Str(md:C_DC:C_PR, s1);
 			Str(ar:C_DC:C_PR, s2);
@@ -269,10 +296,10 @@ implementation
 			Str(A.Im:C_DC:C_PR, s2);
 		end;
 
-		case OUT_FORM of
+		case aForm of
 			cofAlg: s := '(' + s1 + ',' + s2 + ')';
 			cofExp: s := s1 + '*exp(' + s2 + 'i)';
-			cofTrg: s := s1 + '*(cos(' + s2 + ') + i sin(' + s2 + ')';
+			cofTrg: s := s1 + '*(cos(' + s2 + ') + i sin(' + s2 + '))';
 		end;
 
 		CToStringForm := s;
