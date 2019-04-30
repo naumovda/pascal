@@ -5,43 +5,18 @@ const
   SIZE = 10000;
 
 type
-  TDateTime = record
-    Day,
-    Month,
-    Year,
-    Hour,
-    Minute,
-    Second,
-    Milliseconds:integer;
-  end;
-
   TIndex = 1..SIZE;
   TListIndex = 1..SIZE*SIZE;
   TElem = integer;
   TMatrix = array[TIndex, TIndex] of TElem;
   TList = array[TListIndex] of TElem;
 
-function GetTimeInterval(const Start, Finish: TDateTime): real;
-var
-  r: real;
-begin
-  r := (Finish.Milliseconds - Start.Milliseconds) + 
-    (Finish.Second - Start.Second) * 1000 + 
-    (Finish.Minute - Start.Minute) * 60 * 1000 + 
-    (Finish.Hour - Start.Hour) * 60 * 60 * 1000 + 
-    (Finish.Day - Start.Day) * 24 * 60 * 60 * 1000;    
-    
-  GetTimeInterval := r;
-end;
-
 procedure Init(var m: TMatrix; start, finish: TElem);
-var
-  i, j: TIndex;
 begin
   randomize;
   
-  for i := 1 to SIZE do
-    for j := 1 to SIZE do
+  for var i:TIndex := 1 to SIZE do
+    for var j:TIndex := 1 to SIZE do
       m[i,j] := random(finish-start)+start;
 end;
 
