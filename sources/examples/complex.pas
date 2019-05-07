@@ -18,6 +18,14 @@ Var
   at: TComplexTrig;
 
 Begin
+  if 
+  
+  function ParamCount: integer; 
+  //      Возвращает количество параметров командной строки 
+  
+  function ParamStr(i: integer): string;
+  //      Возвращает i-тый параметр командной строки
+
   //задать значение мнимой единицы
   im.Re := 0;
   im.Im := 1;
