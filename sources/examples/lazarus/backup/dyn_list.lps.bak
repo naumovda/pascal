@@ -8,13 +8,13 @@
         <Filename Value="dyn_list.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="190"/>
-        <CursorPos X="31" Y="208"/>
+        <TopLine Value="150"/>
+        <CursorPos X="24" Y="179"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit0>
     </Units>
-    <JumpHistory Count="9" HistoryIndex="8">
+    <JumpHistory Count="8" HistoryIndex="7">
       <Position1>
         <Filename Value="dyn_list.lpr"/>
         <Caret Line="126" Column="20" TopLine="93"/>
@@ -47,10 +47,6 @@
         <Filename Value="dyn_list.lpr"/>
         <Caret Line="186" Column="19" TopLine="147"/>
       </Position8>
-      <Position9>
-        <Filename Value="dyn_list.lpr"/>
-        <Caret Line="135" Column="41" TopLine="130"/>
-      </Position9>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

@@ -263,6 +263,8 @@ begin
       writeln('not find 13.1');
     end;
 
+  PrintList(List);
+
   ClearList(List);
 
   PrintList(List);
