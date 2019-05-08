@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="10"/>
+    <BuildModes Active="Default"/>
+    <Units Count="1">
+      <Unit0>
+        <Filename Value="pointer.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="pointers"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="19" Y="15"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit0>
+    </Units>
+    <JumpHistory Count="7" HistoryIndex="6">
+      <Position1>
+        <Filename Value="pointer.lpr"/>
+        <Caret Line="10" Column="3"/>
+      </Position1>
+      <Position2>
+        <Filename Value="pointer.lpr"/>
+        <Caret Line="4"/>
+      </Position2>
+      <Position3>
+        <Filename Value="pointer.lpr"/>
+        <Caret Line="10" Column="5"/>
+      </Position3>
+      <Position4>
+        <Filename Value="pointer.lpr"/>
+        <Caret Line="11" Column="11"/>
+      </Position4>
+      <Position5>
+        <Filename Value="pointer.lpr"/>
+        <Caret Line="14" Column="8"/>
+      </Position5>
+      <Position6>
+        <Filename Value="pointer.lpr"/>
+        <Caret Line="3" Column="49"/>
+      </Position6>
+      <Position7>
+        <Filename Value="pointer.lpr"/>
+        <Caret Line="14" Column="20"/>
+      </Position7>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>
