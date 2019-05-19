@@ -41,7 +41,7 @@ end;
 //  SortDescending - признак того, что FirstValue >= SecondValue
 function SortDescending(FirstValue, SecondValue: TElem):boolean;
 begin
-  SortAscending := FirstValue >= SecondValue;
+  SortDescending := FirstValue >= SecondValue;
 end;
 
 //процедура сортировки
@@ -59,11 +59,11 @@ begin
   for i:=1 to NMax-1 do
       for k:=i downto 1 do
         //если значения расположены не в требуемом порядке
-        if not aSortFunction(MyVector[k], MyVector[k+1]) then
+        if not aSortFunction(aVector[k], aVector[k+1]) then
           begin
-            tmp := MyVector[k];
-            MyVector[k] := MyVector[k + 1];
-            MyVector[k + 1] := tmp;
+            tmp := aVector[k];
+            aVector[k] := aVector[k + 1];
+            aVector[k + 1] := tmp;
           end;
 end;
 
@@ -96,7 +96,7 @@ begin
   randomize;  
   
   for i:=1 to NMax do
-    MyVector[i] := random(Max - Min) + Min;
+    aVector[i] := random(Max - Min) + Min;
 end;
 
 var
@@ -112,14 +112,14 @@ begin
 
   //сортируем по возрастанию, передавая в качестве параметра 
   //функцию SortAscending
-  Sort(aVector, NMax, SortAscending);
+  Sort(MyVector, NMax, SortAscending);
 
   writeln('Вектор V после сортировки по возрастанию:');
   Output(MyVector, NMax, Dig);
 
   //сортируем по убыванию, передавая в качестве параметра 
   //функцию SortDescending  
-  Sort(aVector, NMax, SortDescending);
+  Sort(MyVector, NMax, SortDescending);
   
   writeln('Вектор V после сортировки по убыванию:');
   Output(MyVector, NMax, Dig);  
