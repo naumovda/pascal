@@ -64,7 +64,7 @@ var
   p: PElement;
 begin
   if IsEmpty(List) then
-    ErrorCode := -1; //устанавливаем признак ошибки, если список пуст
+    ErrorCode := -1 //устанавливаем признак ошибки, если список пуст
   else
    begin
      ErrorCode := 0; //нет ошибки
@@ -115,77 +115,124 @@ begin
     end;
 end;
 
+//функция добавления элемента в начало списка
+//  List: PElement - список
+//  Data: TData - данные элемента
+//возвращаемое значение:
+//  List: PElement - список, указатель на первый элемент
 procedure Append(var List: PElement; const Data: TData);
 var
-  p: PElement;
+  p: PElement; //указатель на элемент списка
 begin
-  New(p);
-  p^.Data := Data;
-  p^.Next := List;
-  List := p;
+  New(p); //выделяем память под новый элемент списка
+  p^.Data := Data; //устанавливаем данные
+  p^.Next := List; //новый элемент ссылает на последний элемент списка
+  List := p; //смещаем указатель списка
 end;
 
+//функция добавления элемента в список после заданного
+//  List: PElement - список
+//  Elem: PElement - элемент, после которого добавляем элемент
+//  Data: TData - данные элемента
+//возвращаемое значение:
+//  List: PElement - список, указатель на первый элемент
 procedure InsertAfter(var List, Elem: PElement; const Data: TData);
 var
   p: PElement;
 begin
-  if Elem = nil then
+  if (Elem = nil) and (List <> nil) then
+    //если элемент пустой, а список - нет, то ничего не делаем
     exit;
 
-  if List = Elem then
+  //если список пуст
+  if List = nil then
+    //то добавляем в начало списка
     Append(List, Data)
   else
     begin
-      new(p);
-      p^.Data := Data;
-      p^.Next := Elem^.Next;
+      new(p); //выделяем память
+      p^.Data := Data; //записываем данные
+      p^.Next := Elem^.Next; //устанавливаем связи
       Elem^.Next := p;
     end;
 end;
 
+//функция удаления элемента из списка
+//  List: PElement - список
+//  Elem: PElement - указатель на удаляемый элемент
+//возвращаемое значение:
+//  List: PElement - список, указатель на первый элемент
+//  Data: TData - данные удаляемого элемента
+//  ErrorCode: integer - признак ошибки
 procedure Delete(var List, Elem: PElement; var Data: TData;
   var ErrorCode: integer);
 var
   p: PElement;
 begin
   if Elem = nil then
+    //если элемент указывает на nil, ошибка
     ErrorCode := -1
   else
     if List = Elem then
+      //если удаляется первый элемент
       Pop(List, Data, ErrorCode)
     else
       begin
+        ErrorCode := 0; //устанавливаем признак ошибки
+
+        //начинаем с начала списка
         p := List;
+        //пока не найден предшествующий элемент
         while p^.Next <> Elem do
           p := p^.Next;
+        //меняяем связи
         p^.Next := Elem^.Next;
         Data := Elem^.Data;
+        //освобождаем память
         Dispose(Elem);
       end;
 end;
 
+//функция удаления всех элементов списка
+//  List: PElement - список
+//возвращаемое значение:
+//  List: PElement - список, указатель на первый элемент
 procedure ClearList(var List: PElement);
 var
   Data: TData;
   ErrorCode: integer;
 begin
+  //пока список не будет пуст
   while not IsEmpty(List) do
-    Pop(List, Data, ErrorCode);
+    Pop(List, Data, ErrorCode); //удаляем по одному элементу
 end;
 
+//функция инициализации списка
+//  List: PElement - список
+//возвращаемое значение:
+//  List: PElement - список, указатель на первый элемент
 procedure CreateList(var List: PElement);
 begin
-  ClearList(List);
-  List := nil;
+  ClearList(List); //очищаем список
+  List := nil; //устанавливаем указатель начала списка на nil
 end;
 
+//функция удаления элемента из списка
+//  List: PElement - список
+//  Data: TData - данные удаляемого элемента
+//возвращаемое значение:
+//  Find: PElement - указатель на найденный элемент
 function Find(const List:PElement; const Data: TData):PElement;
 var
   p: PElement;
 begin
-  p := List;
+  p := List; //начинаем с начала списка
+
+  //пока не дошли до конца списка и пока не нашли элемент
   while (p <> nil) and (abs(p^.Data-Data) > eps) do
-    p := p^.Next;
+    p := p^.Next; //переходим к следующему элементу
+
+  //возвращаем значение
   Find := p;
 end;
 
