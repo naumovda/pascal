@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2019.5.18)  9 JUN 2019 20:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2019.5.18)  9 JUN 2019 21:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -358,20 +358,20 @@ File: t2acmr.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
 ))
 \openout1 = `tickets.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -448,7 +448,7 @@ Underfull \hbox (badness 1881) in paragraph at lines 9--10
  []
 
 )
-Overfull \hbox (6.77872pt too wide) in paragraph at lines 30--32
+Overfull \hbox (6.77872pt too wide) in paragraph at lines 32--34
 []\T2A/cmr/m/n/14.4 Массив. Син-так-си-че-ская фор-ма опи-са-ния ти-па дан-ных 
 и переменной-массива.
  []
@@ -497,7 +497,7 @@ Underfull \hbox (badness 1881) in paragraph at lines 9--10
  []
 
 )
-Overfull \hbox (5.43658pt too wide) in paragraph at lines 122--124
+Overfull \hbox (5.43658pt too wide) in paragraph at lines 124--126
 []\T2A/cmr/m/n/14.4 Билет на ав-то-бус со-дер-жит шесть цифр. Ми-ни-маль-ный но
 -мер би-ле-та - 000001,
  []
@@ -514,10 +514,10 @@ Underfull \hbox (badness 1881) in paragraph at lines 9--10
 
 ) (./bottom.tex) [6] (./tickets.aux) ) 
 Here is how much of TeX's memory you used:
- 3394 strings out of 493994
- 44988 string characters out of 6167985
- 116433 words of memory out of 5000000
- 6983 multiletter control sequences out of 15000+600000
+ 3395 strings out of 493994
+ 44995 string characters out of 6167985
+ 116480 words of memory out of 5000000
+ 6984 multiletter control sequences out of 15000+600000
  5810 words of font info for 20 fonts, out of 8000000 for 9000
  452 hyphenation exceptions out of 8191
  41i,8n,25p,335b,190s stack positions out of 5000i,500n,10000p,200000b,80000s
