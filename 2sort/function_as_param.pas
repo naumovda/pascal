@@ -96,7 +96,7 @@ begin
   randomize;  
   
   for i:=1 to NMax do
-    aVector[i] := random(round(Max - Min)) + Min;
+    aVector[i] := random(Max - Min) + Min;
 end;
 
 var
